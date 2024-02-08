@@ -1,0 +1,32 @@
+<%= link_to "New post", new_post_path %>
+<p style="color: green"><%= notice %></p>
+<h1>Posts</h1>
+<div id="posts">
+  <div class="row  justify-content-center align-items-cente">
+    <% @posts.each do |post| %>
+      <div class="col-lg-3 col-md-4 mb-4">
+        <div data-controller="clickable-card" data-clickable-card-url="<%= post_path(post) %>" 
+             data-action="click->clickable-card#goToUrl">
+          <div class="card_in_index">
+            <%= render post %>
+            <hr>
+            <% if post.comments.count > 0%>
+              Total commnets: <%= post.comments.count%>
+            <% else %>
+              No comments yet.
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+    <% end %>
+  </div>
+</div>
+<br/>
+<br/>
+<div class="car">
+  <h3> Comments for Post: <%#= @post.id %></h3>
+  <div id="comments">
+    <%#= render @post.comments %>
+  </div>
+</div>

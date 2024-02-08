@@ -1,0 +1,10 @@
+
+<!-- app/views/comments/_comment.html.erb -->
+<p>
+  <strong>Comment:</strong>
+  <%= comment.message %>
+</p>
+
+<%= link_to 'Delete Comment', [comment.post, comment],
+             method: :delete,
+             data: { confirm: 'Are you sure?' } %>
