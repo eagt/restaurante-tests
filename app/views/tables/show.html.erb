@@ -1,0 +1,11 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @table %>
+
+<div>
+  <%= link_to "Edit this table", edit_restaurante_table_path(@restaurante, @table) %> |
+  <%= link_to "Back to tables", restaurante_tables_path(@restaurante) %>
+</div>
+<div class='mt-4'> 
+  <%= button_to "Destroy this table",  restaurante_table_path(@restaurante, @table), method: :delete %>
+</div>
