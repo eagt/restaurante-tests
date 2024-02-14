@@ -1,0 +1,78 @@
+<p style="color: green"><%= notice %></p>
+<div id='form' data-controller='restaurante-form' data-target='newForm'>
+  <h3>New Restaurante</h3>
+  <%= form_with(model: @restaurante) do |form| %>
+    <% if @restaurante.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(@restaurante.errors.count, "error") %> prohibited this restaurante from being saved:</h2>
+        <ul>
+          <% @restaurante.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div>
+      <%= form.label :name, style: "display: block" %>
+      <%= form.text_field :name %>
+    </div>
+    <div>
+      <%= form.submit  %>
+    </div>
+  <% end %>
+  <div data-controller='new-link' data-new-link-restaurante-form-outlet='#form'>
+    <%= link_to "New restaurante", new_restaurante_path, "data-action": "new_link#newForm" %>
+  </div>
+</div>
+
+
+</div>
+<h1>Restaurantes</h1>
+<div id="restaurantes">
+  <% @restaurantes.each do |restaurante| %>
+    <%= render restaurante %>
+    <p>
+      <%= link_to "Show this restaurante", restaurante %>
+    </p>
+    <p>
+      <%= link_to "Tables", restaurante_tables_path(restaurante) %>
+    </p>
+  <% end %>
+</div>
+
+
+<p style="color: green"><%= notice %></p>
+<div id='form' data-controller='restaurante-form'>
+  <h3>New Restaurante</h3>
+  <%= form_with(model: @restaurante) do |form| %>
+    <% if @restaurante.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(@restaurante.errors.count, "error") %> prohibited this restaurante from being saved:</h2>
+        <ul>
+          <% @restaurante.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div>
+      <%= form.label :name, style: "display: block" %>
+      <%= form.text_field :name %>
+    </div>
+    <div>
+      <%= form.submit  %>
+    </div>
+  <% end %>
+  <div data-controller='new-link' data-new-link-restaurante-form-outlet='#form'>
+    <%= link_to "New restaurante", new_restaurante_path, "data-action": "new_link#showForm" %>
+  </div>
+</div>
+
+With the code above I am trying to show/hide the form for creating a new restaurante. 
+The form is hidden by default and should be shown when the user clicks on the "New restaurante" link. 
+The form is shown when the user clicks on the link, but when the user clicks on the link again, the form is not hidden. 
+I am using StimulusJS to show/hide the form.
+
+# new_link_controller.js
+```javascript
+```

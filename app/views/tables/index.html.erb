@@ -1,0 +1,63 @@
+<p style="color: green"><%= notice %></p>
+Back to <%= link_to "Restaurante", restaurante_path(@restaurante) %>
+<div class='mt-3 mb-5'>
+  Restaurante: <strong><%= @restaurante.name %></strong>
+</div>
+<div data-controller='tables' class='mb-5'>
+  <%= form_with model: [@restaurante, @table], data: { action: "submit->tables#submit", tables_target: 'tableForm' } do |form| %>
+    <% if @table.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(@table.errors.count, "error") %> prohibited this table from being saved:</h2>
+        <ul>
+          <% @table.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div>
+      <%= form.label :number, style: "display: block" %>
+      <%= form.text_field :number, data: { tables_target: 'number' } %>
+    </div>
+    <div class='mt-2'>
+       <%= form.submit "Create Table", class: 'btn btn-login mt-3 mb-5', data: { tables_target: 'submitButton' } %>
+    </div>
+    <div>
+      <%= link_to "Cancel", restaurante_tables_path(@restaurante)%>
+    </div>
+  <% end %>
+  <div class='mt-5'data-tables-target='newLink'>
+    <a href="" data-action='click->tables#opentableform'>New Table</a>
+  </div>
+  <div data-tables-target='tableList' >
+    <h1 class='mt-4'>Tables</h1>
+    <% @restaurante.tables.each do |table| %>
+      <% if table && table.persisted? %>
+        <%= render table %>
+        <div class='mt-1 mb-5'>
+          <a href="" data-action='click->tables#showTable' data-table-id="<%= table.id %>" data-restaurante-id="<%= @restaurante.id %>">Show</a> | 
+          <%= link_to 'Edit Table', '#', data: { table_id: table.id, restaurante_id: table.restaurante_id,  action: 'click->tables#editTable', edit: true } %> | 
+          <%= link_to "Delete", restaurante_table_path(table.restaurante, table.id), method: :delete, data: { confirm: "Are you sure?" } %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div data-tables-target='table'>
+    <div class=mb-5>
+      <%= link_to "Back to Tables", restaurante_tables_path(@restaurante)%>
+    </div>
+    <h3>Table</h3>
+    <div>
+      <div>
+        <p>
+          <strong>Number:</strong>
+          <span class="table-number"><%= @table.number %></span>
+        </p>
+        <p>
+          <strong>Restaurante:</strong>
+          <span class="table-restaurant"><%= @table.restaurante.name %></span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

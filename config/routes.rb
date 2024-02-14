@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  
-  resources :posts do
-    resources :comments, only: [:create, :destroy]
+
+  resources :restaurantes do 
+    resources :tables
   end
-  root 'pages#home'
+  
+  root 'restaurantes#index'
   get 'pages/dashboard'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
